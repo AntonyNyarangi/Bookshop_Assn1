@@ -44,12 +44,13 @@ void transaction(){
   totalCost = b->calculateTotalCost(copiesNeeded);
   //display results of calculation and new stock available
   cout << "\nThe total cost is: " << totalCost << endl;
-  cout << "Stock Updated! Available stock = " << b->stockValue << endl;
+  cout << "**Available stock = " << b->stockValue << endl;
   //prompt for another transaction
-  cout << "\nwould you like to carry out another transaction? (y/n)" << endl;
+  cout << "\nif you would like to begin another transaction, enter 'y' or any other entry to exit." << endl;
   cin >> anotherTransaction;
   //recursive call if the user wants another transaction else, program termination
   if(anotherTransaction == 'y'){
+    cin.ignore();
     transaction();
   }else if( anotherTransaction == 'n') {
     cout << "\n\n**Thank you, Have a nice day.**" << endl;
