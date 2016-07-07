@@ -28,31 +28,48 @@ void transaction(){
   int copiesNeeded;
   double totalCost;
   char anotherTransaction;
+  char updateBookPrice;
   //prompt user for input --> title and author name of the book the would like
-  cout << "\nPlease enter the title of the book" << endl;
+  cout << "\nPlease enter the title of the book: ";
   getline(cin,title);
-  cout << "Please enter the name of the author" << endl;
+  cout << "Please enter the name of the author: ";
   getline(cin,authorName);
   //check for book availability, gives error if book does not exist
   Books* b = checkBookAvailability(title,authorName);
   //  displayBookDetails(b);
   b->displayBookDetails();
+  //check if user would like to update the book's Price and update it accordingly.
+  cout<< "\nIf you would like to update the book's price, enter 'y', if not, enter anything else to continue: ";
+  cin>> updateBookPrice;
+  int newPrice;
+  if(updateBookPrice == 'y'){
+    cout << "Please enter the new price: ";
+    cin >> newPrice;
+    b->doUpdatePrice(newPrice);
+  }
   //prompt user to enter the number of copies they need
-  cout << "\n\nHow many copies do you need?" << endl;
+  cout << "\n\nHow many copies do you need?: ";
   cin >> copiesNeeded;
   //call method to calculate total cost and update the stock;
   totalCost = b->calculateTotalCost(copiesNeeded);
   //display results of calculation and new stock available
-  cout << "\nThe total cost is: " << totalCost << endl;
-  cout << "**Available stock = " << b->stockValue << endl;
+  cout << "The total cost is: " << totalCost;
+  cout << "**Available stock = " << b->stockValue;
   //prompt for another transaction
-  cout << "\nif you would like to begin another transaction, enter 'y' or any other entry to exit." << endl;
+  cout << "\n\nIf you would like to begin another transaction, enter 'y'. Enter 'n' or any other letter to exit.: ";
   cin >> anotherTransaction;
   //recursive call if the user wants another transaction else, program termination
   if(anotherTransaction == 'y'){
     cin.ignore();
     transaction();
-  }else if( anotherTransaction == 'n') {
+  }else{
+    //calling class destructor
+    myBook0->Books::~Books();
+    myBook1->Books::~Books();
+    myBook2->Books::~Books();
+    myBook3->Books::~Books();
+    myBook4->Books::~Books();
+    myBook5->Books::~Books();
     cout << "\n\n**Thank you, Have a nice day.**" << endl;
   }
 }
@@ -79,5 +96,6 @@ Books* checkBookAvailability(string b_title, string a_name){
    }
    else{
      cout << "\n\nStatus: Not Available\nBook does NOT EXIST" << endl;
+     cout << "\nTransaction  not successful" << endl;
    }
  }
