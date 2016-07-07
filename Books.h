@@ -22,11 +22,13 @@ public:
     bookPrice = bPrice;
     stockValue = stock;
     }
-    string getAuthorName(){
-      return authorName;
-  }
 
-  //method to display the details of a book object
+    //destructor
+    ~Books(){
+      
+    }
+
+    //method to display the details of a book object
   void displayBookDetails (){
     cout << "\n\nStatus=Available\nBook Details" << endl;
     cout << "\tBook Title: " << bookTitle << endl;
@@ -42,19 +44,28 @@ public:
     double cost;
      if (needed > stockValue){
        cout << "Required copies not in stock" << endl;
+       cout << "\nTransaction not successful" << endl;
+       // countUnsuccessfulTransactions();
      }else{
        cost = needed * bookPrice;
        stockValue = stockValue - needed;
+       cout << "\nTransaction successful" << endl;
+       //countSuccessfulTransactions();
      }
      return cost;
    }
+   //method to call private updatePrice
+   void doUpdatePrice(double newPrice){
+     updatePrice(newPrice);
+   }
+
    //method to record number of unsuccessful transactions
    static void countUnsuccessfulTransactions (){
      unsuccessfulTransactions = unsuccessfulTransactions + 1;
      return;
    }
    //method to record number of successful transactions
-   static void coutSuccessfulTransactions(){
+   static void countSuccessfulTransactions(){
      successfulTransactions = successfulTransactions + 1;
      return;
    }
@@ -63,5 +74,6 @@ private:
   //private member method
   void updatePrice(double newPrice){
     bookPrice = newPrice;
+    cout << "Book price updated. New price = " << bookPrice << endl;
   }
 };
