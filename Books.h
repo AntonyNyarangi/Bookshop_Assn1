@@ -25,11 +25,10 @@ public:
 
     //destructor
     ~Books(){
-      
     }
 
     //method to display the details of a book object
-  void displayBookDetails (){
+    void displayBookDetails (){
     cout << "\n\nStatus=Available\nBook Details" << endl;
     cout << "\tBook Title: " << bookTitle << endl;
     cout << "\tAuthor Name: " << authorName << endl;
@@ -54,6 +53,7 @@ public:
      }
      return cost;
    }
+
    //method to call private updatePrice
    void doUpdatePrice(double newPrice){
      updatePrice(newPrice);
@@ -64,6 +64,7 @@ public:
      unsuccessfulTransactions = unsuccessfulTransactions + 1;
      return;
    }
+
    //method to record number of successful transactions
    static void countSuccessfulTransactions(){
      successfulTransactions = successfulTransactions + 1;
